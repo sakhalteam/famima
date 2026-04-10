@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Html, OrbitControls, Environment } from "@react-three/drei";
+import { useGLTF, Html, OrbitControls } from "@react-three/drei";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { experiences } from "../data/experiences";
@@ -12,7 +12,6 @@ function FloatingCard({ experience, position }: { experience: Experience; positi
   const navigate = useNavigate();
   const ref = useRef<THREE.Group>(null!);
 
-  // Gentle hover bob
   const offset = useMemo(() => Math.random() * Math.PI * 2, []);
   useFrame((state) => {
     if (ref.current) {
@@ -24,7 +23,6 @@ function FloatingCard({ experience, position }: { experience: Experience; positi
     <group ref={ref} position={position}>
       <Html
         center
-        distanceFactor={3}
         style={{ pointerEvents: "auto" }}
       >
         <button
@@ -45,21 +43,20 @@ function FloatingCard({ experience, position }: { experience: Experience; positi
 function StoreModel() {
   const { scene } = useGLTF(GLB_PATH);
 
-  // Find portal positions from the GLB
   const cardPositions = useMemo(() => {
     const positions: { experience: Experience; position: THREE.Vector3 }[] = [];
-
     for (const exp of experiences) {
       const obj = scene.getObjectByName(exp.portalMesh);
       if (obj) {
         const worldPos = new THREE.Vector3();
         obj.getWorldPosition(worldPos);
-        // Float card above the object
         worldPos.y += 0.6;
         positions.push({ experience: exp, position: worldPos });
+      } else {
+        // Fallback for missing portals — place near center
+        positions.push({ experience: exp, position: new THREE.Vector3(0, 1.4, 0.5) });
       }
     }
-
     return positions;
   }, [scene]);
 
@@ -78,11 +75,26 @@ export default function FamimaScene() {
     <div className="scene-container">
       <Canvas
         camera={{ position: [0, 2.5, 4], fov: 50 }}
-        gl={{ antialias: true }}
+        frameloop="demand"
+        gl={{
+          antialias: true,
+          powerPreference: "default",
+          failIfMajorPerformanceCaveat: false,
+        }}
+        onCreated={({ gl, invalidate }) => {
+          // Kick off a continuous render loop since we use useFrame for bob animation
+          const loop = () => { invalidate(); requestAnimationFrame(loop); };
+          requestAnimationFrame(loop);
+
+          gl.domElement.addEventListener("webglcontextlost", (e) => {
+            e.preventDefault();
+          });
+        }}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[3, 5, 2]} intensity={0.8} />
-        <Environment preset="apartment" />
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[3, 5, 2]} intensity={1} />
+        <directionalLight position={[-2, 3, -1]} intensity={0.3} color="#88aaff" />
+        <hemisphereLight args={["#b1e1ff", "#443322", 0.5]} />
         <StoreModel />
         <OrbitControls
           enablePan={false}

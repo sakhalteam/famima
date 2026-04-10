@@ -129,12 +129,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 14px 16px 12px;
-  background: rgba(15, 21, 37, 0.85);
+  gap: 6px;
+  padding: 18px 22px 16px;
+  background: rgba(15, 21, 37, 0.95);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
   text-align: center;
   white-space: nowrap;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -156,18 +156,18 @@ body {
 }
 
 .scene-card-emoji {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1;
 }
 
 .scene-card-title {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
 }
 
 .scene-card-sub {
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   color: var(--muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -519,4 +519,456 @@ body:has(.receipt-page) {
 }
 .stub-back:hover {
   text-decoration: underline;
+}
+
+/* ── Onigiri Zukan ── */
+.zukan-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .zukan-layout { grid-template-columns: 1fr; }
+}
+
+.zukan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zukan-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  text-align: left;
+}
+.zukan-item:hover { border-color: var(--famima-green); }
+.zukan-item--active {
+  border-color: var(--famima-green);
+  background: var(--accent-dim);
+}
+.zukan-item-emoji { font-size: 1.3rem; }
+.zukan-item-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.zukan-item-name-en { font-size: 0.7rem; color: var(--muted); }
+
+.zukan-detail {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.zukan-detail-hero { font-size: 5rem; text-align: center; margin-bottom: 8px; }
+.zukan-detail-title { font-size: 1.5rem; font-weight: 700; text-align: center; }
+.zukan-detail-subtitle { color: var(--muted); text-align: center; font-size: 0.8rem; margin-bottom: 16px; }
+.zukan-detail-desc { font-size: 0.85rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
+
+.zukan-detail-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.zukan-stat {
+  flex: 1;
+  background: var(--card);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+.zukan-stat-label { display: block; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.zukan-stat-value { display: block; font-size: 1rem; font-weight: 700; color: var(--famima-green); margin-top: 2px; }
+
+.zukan-funfact {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.8rem;
+  color: var(--muted-bright);
+  line-height: 1.5;
+}
+.zukan-funfact-label {
+  display: inline-block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--famima-green);
+  margin-bottom: 4px;
+}
+.zukan-funfact p { margin: 0; }
+
+/* ── Famichiki Clicker ── */
+.clicker-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .clicker-layout { grid-template-columns: 1fr; }
+}
+
+.clicker-main { text-align: center; }
+
+.clicker-stats { margin-bottom: 24px; }
+.clicker-count { font-size: 2.5rem; font-weight: 700; color: var(--famima-green); }
+.clicker-cps { font-size: 0.85rem; color: var(--muted); }
+.clicker-level { font-size: 0.9rem; color: var(--text); margin-top: 4px; }
+
+.clicker-btn {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--famima-green);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.clicker-btn:hover { box-shadow: 0 0 30px rgba(0,180,162,0.3); }
+.clicker-btn:active { transform: scale(0.95); }
+.clicker-btn-emoji { font-size: 4rem; }
+.clicker-btn-text { font-size: 1.2rem; font-weight: 700; color: var(--famima-green); }
+
+.clicker-float {
+  position: absolute;
+  color: var(--famima-green);
+  font-weight: 700;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: float-up 0.8s ease-out forwards;
+}
+@keyframes float-up {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-60px); }
+}
+
+.clicker-total { margin-top: 16px; font-size: 0.8rem; color: var(--muted); }
+
+.clicker-shop {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.clicker-shop-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+
+.clicker-upgrade {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: border-color 0.15s;
+  text-align: left;
+}
+.clicker-upgrade:hover:not(:disabled) { border-color: var(--famima-green); }
+.clicker-upgrade--locked { opacity: 0.4; cursor: default; }
+.clicker-upgrade-emoji { font-size: 1.5rem; }
+.clicker-upgrade-info { flex: 1; }
+.clicker-upgrade-name { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.clicker-upgrade-desc { display: block; font-size: 0.65rem; color: var(--muted); }
+.clicker-upgrade-right { text-align: right; }
+.clicker-upgrade-cost { display: block; font-size: 0.75rem; color: var(--famima-green); font-weight: 600; }
+.clicker-upgrade-owned { display: block; font-size: 0.65rem; color: var(--muted); }
+
+/* ── Nakami Toggle ── */
+.nakami-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .nakami-layout { grid-template-columns: 1fr; }
+}
+
+.nakami-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nakami-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s;
+}
+.nakami-item:hover { border-color: var(--famima-green); }
+.nakami-item--active { border-color: var(--famima-green); background: var(--accent-dim); }
+.nakami-item-emoji { font-size: 1.3rem; }
+.nakami-item-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+
+.nakami-viewer {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.nakami-toggle-btn {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nakami-toggle-btn:hover { border-color: var(--famima-green); transform: scale(1.05); }
+.nakami-toggle-btn--inside { background: rgba(0,180,162,0.1); border-color: var(--famima-green); }
+.nakami-big-emoji { font-size: 4rem; transition: transform 0.3s; }
+.nakami-toggle-btn--inside .nakami-big-emoji { transform: scale(0.9); }
+
+.nakami-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 16px; }
+.nakami-food-title { font-size: 1.2rem; font-weight: 700; }
+.nakami-food-en { font-size: 0.8rem; font-weight: 400; color: var(--muted); }
+.nakami-food-desc { font-size: 0.85rem; color: var(--text); line-height: 1.6; margin: 8px 0 16px; }
+
+.nakami-layers { text-align: left; }
+.nakami-layers-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+.nakami-layer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--card);
+  border-radius: 6px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  color: var(--text);
+  transition: background 0.2s;
+}
+.nakami-layer--highlight { background: var(--accent-dim); }
+.nakami-layer-num {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+/* ── Iriguchi Chime ── */
+.chime-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  padding-left: 56px;
+}
+.chime-play, .chime-preset, .chime-clear {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.chime-play:hover, .chime-preset:hover, .chime-clear:hover { border-color: var(--famima-green); }
+.chime-play--active { background: var(--famima-green); color: #fff; border-color: var(--famima-green); }
+
+.chime-bpm {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+.chime-bpm-label { font-size: 0.7rem; color: var(--muted); margin-right: 4px; }
+.chime-bpm-btn {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.chime-bpm-btn--active { background: var(--famima-green); color: #fff; border-color: var(--famima-green); }
+
+.chime-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-x: auto;
+  padding-left: 56px;
+}
+.chime-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.chime-note-label {
+  width: 50px;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 8px;
+}
+.chime-note-name { display: block; font-size: 0.7rem; color: var(--text); font-weight: 600; }
+.chime-note-jp { display: block; font-size: 0.55rem; color: var(--muted); }
+
+.chime-cell {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  flex-shrink: 0;
+}
+.chime-cell:hover { border-color: var(--famima-green); }
+.chime-cell--on { background: var(--famima-green); border-color: var(--famima-green); }
+.chime-cell--active { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.5); }
+.chime-cell--bar { margin-left: 4px; }
+
+.chime-hint {
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  padding-left: 56px;
+}
+
+/* ── Bento Memory ── */
+.memory-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-left: 56px;
+  flex-wrap: wrap;
+}
+.memory-stat {
+  font-size: 0.85rem;
+  color: var(--muted-bright);
+}
+.memory-reset {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+.memory-reset:hover { border-color: var(--famima-green); }
+
+.memory-win {
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--accent-dim);
+  border: 1px solid var(--famima-green);
+  border-radius: 10px;
+  color: var(--famima-green);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .memory-grid { gap: 4px; }
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  perspective: 600px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+.memory-card--flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front,
+.memory-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.memory-card-front {
+  background: var(--famima-blue);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.memory-card:hover .memory-card-front {
+  border-color: var(--famima-green);
+}
+.memory-card-logo {
+  font-size: 1.8rem;
+  filter: grayscale(0.3);
+}
+
+.memory-card-back {
+  background: var(--card);
+  border: 2px solid var(--border);
+  transform: rotateY(180deg);
+}
+.memory-card--matched .memory-card-back {
+  border-color: var(--famima-green);
+  background: var(--accent-dim);
+}
+.memory-card-emoji {
+  font-size: 1.8rem;
+}
+.memory-card-name {
+  font-size: 0.55rem;
+  color: var(--muted);
 }
