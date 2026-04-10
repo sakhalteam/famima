@@ -6,6 +6,8 @@ export interface Experience {
   emoji: string;
   path: string;
   ready: boolean;
+  /** GLB object name this card floats above */
+  portalMesh: string;
 }
 
 export const experiences: Experience[] = [
@@ -17,6 +19,7 @@ export const experiences: Experience[] = [
     emoji: "🧾",
     path: "/konbini-receipt-generator",
     ready: true,
+    portalMesh: "portal_konbini_receipt_generator",
   },
   {
     id: "onigiri-zukan",
@@ -26,6 +29,7 @@ export const experiences: Experience[] = [
     emoji: "🍙",
     path: "/onigiri-zukan",
     ready: false,
+    portalMesh: "portal_page_03",
   },
   {
     id: "famichiki-clicker",
@@ -35,6 +39,7 @@ export const experiences: Experience[] = [
     emoji: "🍗",
     path: "/famichiki-clicker",
     ready: false,
+    portalMesh: "portal_page_04",
   },
   {
     id: "nakami-toggle",
@@ -44,6 +49,7 @@ export const experiences: Experience[] = [
     emoji: "🔍",
     path: "/nakami-toggle",
     ready: false,
+    portalMesh: "portal_page_05",
   },
   {
     id: "iriguchi-chime",
@@ -53,6 +59,7 @@ export const experiences: Experience[] = [
     emoji: "🔔",
     path: "/iriguchi-chime",
     ready: false,
+    portalMesh: "portal_page_06",
   },
   {
     id: "bento-builder",
@@ -62,5 +69,6 @@ export const experiences: Experience[] = [
     emoji: "🍱",
     path: "/bento-builder",
     ready: false,
+    portalMesh: "portal_nothing",
   },
 ];

@@ -1,39 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { experiences } from "../data/experiences";
+import { Suspense } from "react";
+import FamimaScene from "../components/FamimaScene";
 
 export default function Landing() {
-  const navigate = useNavigate();
-
   return (
-    <div className="landing">
-      <header className="landing-header">
+    <div className="landing-3d">
+      <header className="landing-header-overlay">
         <h1 className="landing-title">
           <span className="landing-title-jp">ファミリーマート</span>
           <span className="landing-title-en">Family Mart</span>
         </h1>
-        <p className="landing-subtitle">
-          A collection of konbini mini-experiences
-        </p>
       </header>
 
-      <div className="experience-grid">
-        {experiences.map((exp) => (
-          <button
-            key={exp.id}
-            className={`exp-card ${exp.ready ? "exp-card--ready" : "exp-card--coming"}`}
-            onClick={() => exp.ready && navigate(exp.path)}
-            disabled={!exp.ready}
-          >
-            <span className="exp-card-emoji">{exp.emoji}</span>
-            <span className="exp-card-title-jp">{exp.titleJp}</span>
-            <span className="exp-card-title-en">{exp.titleEn}</span>
-            <span className="exp-card-desc">{exp.description}</span>
-            {!exp.ready && <span className="exp-card-badge">Coming Soon</span>}
-          </button>
-        ))}
-      </div>
+      <Suspense fallback={<div className="scene-loading">Loading store...</div>}>
+        <FamimaScene />
+      </Suspense>
 
-      <footer className="landing-footer">
+      <footer className="landing-footer-overlay">
         <p>Fan project. Not affiliated with FamilyMart Co., Ltd.</p>
       </footer>
     </div>
